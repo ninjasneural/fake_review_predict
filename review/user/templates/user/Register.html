@@ -1,0 +1,69 @@
+{% extends 'temp/Home.html' %}
+{% block base %}
+  <section class="book_section layout_padding">
+    <div class="container" style="width:350px;">
+      <div class="row">
+{#        <div class="col">#}
+          <form method="post">
+              {% csrf_token %}
+            <h4><span>Sign Up</span>
+            </h4>
+            <div class="form-row">
+              <div class="form-group col-lg-4">
+                <label for="user">User Name </label>
+                <input type="text" class="form-control" id="user" placeholder="Username" name="user" style="width:350px;">
+              </div>
+            </div>
+            <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label for="email">E-Mail</label>
+                <input type="email" class="form-control" id="email" placeholder="E-mail" name="email" style="width:350px;">
+              </div>
+            </div>
+              <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label for="Contact">Contact</label>
+                <input type="text" class="form-control" id="conatct" placeholder="Phone number" name="phone" style="width:350px;">
+              </div>
+            </div>
+            <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label for="pass">Password</label>
+                <input type="password" class="form-control" id="pass" placeholder="password" name="pass" style="width:350px;">
+              </div>
+            </div>
+              <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label for="copass">Confirm</label>
+                <input type="password" class="form-control" id="copass" placeholder="Confirm password" name="copass" style="width:350px;">
+              </div>
+            </div>
+            <div class="btn-box">
+              <input type="submit" class="btn" onclick="validatepwd()" value="Signup">
+            </div>
+          </form>
+{#        </div>#}
+      </div>
+    </div>
+  </section>
+    <script type="text/javascript">
+        function validatepwd() {
+            pwd=document.getElementById('pass').value;
+            cpwd=document.getElementById('copass').value;
+            if(pwd!=cpwd)
+            {
+                document.getElementById('copass').value;
+                alert('password Miss match!!!')
+            }
+        }
+    </script>
+    {% if kk == 'fa' %}
+        <script>
+        alert("User Already exist..")
+        </script>
+        {% elif kk == 'ss' %}
+        <script>
+        alert("Successfully Registered....")
+        </script>
+    {% endif %}
+{% endblock %}
