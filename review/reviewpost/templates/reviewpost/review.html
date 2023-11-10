@@ -1,0 +1,32 @@
+{% extends 'temp/user.html' %}
+{% block base %}
+  <section class="book_section layout_padding">
+    <div class="container" style="width: 500px;">
+      <div class="row">
+{#        <div class="col">#}
+          <form method="post">
+              {% csrf_token %}
+            <h4><span>Review</span>
+            </h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="user">Post Review </label>
+                  <textarea type="text" class="form-control" id="user" placeholder="Enter your Review" name="review" style="width:500px; height: 200px" required=""></textarea>
+              </div>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-success">Check</button>
+            </div>
+              <div class="form-row">
+              <div class="form-group">
+                <label for="Result">Result</label>
+                  <input type="text" class="form-control" id="result" placeholder="{{ kk }}" style="width:500px;">
+              </div>
+            </div>
+          </form>
+{#        </div>#}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
