@@ -1,0 +1,23 @@
+{% extends 'temp/user.html' %}
+{% block base %}
+  <section class="book_section layout_padding">
+    <div class="container" style="width: 1000px;">
+    <h4><span style="color: #20c997">History</span></h4>
+      <table class="table" style="width: 1000px;">
+          <tr style="color: #20c997">
+              <td>Review</td>
+              <td>Result</td>
+              <td>Date</td>
+          </tr>
+            {% for i in kk %}
+          <tr>
+              <td>{{ i.review }}</td>
+              <td>{{ i.status }}</td>
+              <td>{{ i.date }}</td>
+          </tr>
+            {% endfor %}
+      </table>
+    </div>
+  </section>
+
+{% endblock %}

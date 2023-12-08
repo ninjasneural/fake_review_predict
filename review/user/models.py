@@ -12,3 +12,16 @@ class User(models.Model):
         managed = False
         db_table = 'user'
 
+
+
+class Feedback(models.Model):
+    feedback_id = models.AutoField(primary_key=True)
+    feedback = models.CharField(max_length=200)
+    # user_id = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'feedback'
