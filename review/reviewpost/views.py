@@ -30,11 +30,11 @@ model = SequentialModel(input_dim=512)
 # model = joblib.load(r'C:\Users\athul\Desktop\Review_system\review\static\lr_model.pkl')
 # vectorization = joblib.load(r'C:\Users\athul\Desktop\Review_system\review\static\TFIDF_vectorization.pkl')
 
-vectorization = joblib.load(r'C:\Users\athul\Desktop\Review_system\review\static\TFIDF_vectorization_v1.pkl')
+vectorization = joblib.load(r'C:\Users\athul\Desktop\Review_system\review\static\TFIDF_vectorization_v2.pkl')
 
 # Load the saved model state dictionary
 model.load_state_dict(
-    torch.load(r'C:\Users\athul\Desktop\Review_system\review\static\SNN_model_state.pth', map_location=torch.device('cpu')))
+    torch.load(r'C:\Users\athul\Desktop\Review_system\review\static\SNN_model_state_v3.pth', map_location=torch.device('cpu')))
 
 def clean_text(text):
     # Remove extra white spaces by replacing multiple spaces with a single space
@@ -48,6 +48,10 @@ def clean_text(text):
 
     return cleaned_text
 
+import math
+import time
+from tqdm import tqdm
+from joblib import Parallel,delayed
 
 def review(request):
     ss=request.session["u_id"]
@@ -71,15 +75,21 @@ def review(request):
         print('Prediction = ', prediction)
         print('-------------------------------')
 
+        prediction=prediction.cpu().detach().numpy()
+        prediction1= round(prediction[0]*100,2)
+
 
         if prediction<.5:
-            aa='This review is Fake'
+            aa=f'This review is {100-prediction1}% chance to be fake '
+            confi = 100-prediction1
         else:
-            aa='This Review is genuine'
+            aa=f'This review is {prediction1}% chance to be genuine '
+            confi = prediction1
         obb.status = aa
         obb.save()
         context={
-            'kk': aa
+            'kk': aa,
+            'per': confi
         }
         return render(request,'reviewpost/review.html',context)
     return render(request,'reviewpost/review.html')

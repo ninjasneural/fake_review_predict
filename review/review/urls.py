@@ -17,6 +17,7 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
 from login import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('login/',include('login.url')),
@@ -24,5 +25,6 @@ urlpatterns = [
     url('reviewpost/',include('reviewpost.url')),
     url('temp/',include('temp.url')),
     url('$',views.login)
+
 
 ]
