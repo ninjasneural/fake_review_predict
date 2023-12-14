@@ -1,0 +1,23 @@
+{% extends 'temp/user.html' %}
+{% block base %}
+  <section class="book_section layout_padding">
+    <div class="container" style="width: 750px;">
+        <h4><span style="color: #20c997">Feedbacks</span></h4>
+      <table class="table" style="width: 750px;">
+          <tr style="color: #20c997">
+              <td>Feedback</td>
+              <td>User</td>
+              <td>Date</td>
+          </tr>
+            {% for i in kk %}
+          <tr>
+              <td>{{ i.feedback }}</td>
+              <td>{{ i.user.username }}</td>
+              <td>{{ i.date }}</td>
+          </tr>
+            {% endfor %}
+      </table>
+    </div>
+  </section>
+
+{% endblock %}

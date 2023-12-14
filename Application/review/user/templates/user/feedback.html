@@ -1,0 +1,30 @@
+{% extends 'temp/user.html' %}
+{% block base %}
+  <section class="book_section layout_padding">
+    <div class="container" style="width:350px;">
+      <div class="row">
+{#        <div class="col">#}
+          <form method="post">
+              {% csrf_token %}
+            <h4><span>Feedback</span>
+            </h4>
+            <div class="form-row">
+              <div class="form-group col-lg-4">
+                  <textarea class="form-control" id="user" placeholder="Enter Your Feedback" name="user" style="width:350px; height: 200px;" required=""></textarea>
+              </div>
+            </div>
+            <div class="btn-box">
+              <input type="submit" class="btn btn-success" value="Send">
+            </div>
+          </form>
+{#        </div>#}
+      </div>
+    </div>
+  </section>
+
+    {% if kk == 'fa' %}
+        <script>
+        alert("Feedback send")
+        </script>
+    {% endif %}
+{% endblock %}

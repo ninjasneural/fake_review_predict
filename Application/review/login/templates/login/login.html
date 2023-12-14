@@ -1,0 +1,37 @@
+{% extends 'temp/Home.html' %}
+{% block base %}
+  <section class="book_section layout_padding">
+    <div class="container" style="width: 300px;">
+      <div class="row">
+{#        <div class="col">#}
+          <form method="post">
+              {% csrf_token %}
+            <h4><span>Login</span>
+            </h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="user">User Name </label>
+                <input type="text" class="form-control" id="user" placeholder="Username or E-mail" name="user" style="width:300px;" required="">
+              </div>
+            </div>
+            <div class="form-row ">
+              <div class="form-group">
+                <label for="pass">Password</label>
+                <input type="password" class="form-control" id="pass" placeholder="password" name="pass" style="width: 300px;" required="">
+              </div>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-success">Login</button>
+            </div>
+          </form>
+{#        </div>#}
+      </div>
+    </div>
+  </section>
+    {% if msg %}
+        <script>
+        alert("username or password incorrect.... please try again....!")
+        </script>
+
+    {% endif %}
+{% endblock %}
