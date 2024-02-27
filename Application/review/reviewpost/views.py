@@ -8,6 +8,12 @@ import torch
 import torch.nn as nn
 import numpy as np
 
+
+import nltk
+import nltk.sentiment
+import nltk.sentiment.util
+
+
 # Create your views here.
 class SequentialModel(nn.Module):
     def __init__(self, input_dim):
@@ -78,7 +84,26 @@ def review(request):
         prediction=prediction.cpu().detach().numpy()
         prediction1= round(prediction[0]*100,2)
 
+        poscnt = 0
+        negcnt = 0
+        news = obb.review
+        print(news)
+        sid = nltk.sentiment.vader.SentimentIntensityAnalyzer()
+        compound = sid.polarity_scores(news)["compound"]
+        print("result of sentiment",compound)
 
+
+
+        if compound > 0:
+            senti="positive"
+        elif compound < 0:
+            senti = "Negative"
+        else:
+            senti="neutral"
+
+
+
+        print(senti)
         if prediction<.5:
             aa=f'This review is {100-prediction1}% chance to be fake '
             confi = 100-prediction1
@@ -89,7 +114,8 @@ def review(request):
         obb.save()
         context={
             'kk': aa,
-            'per': confi
+            'per': confi,
+            'senti': senti
         }
         return render(request,'reviewpost/review.html',context)
     return render(request,'reviewpost/review.html')
